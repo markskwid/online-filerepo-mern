@@ -8,7 +8,6 @@ const User = require("../routes/userRoutes");
 const Logs = require("../routes/logsRoutes");
 const connection = require("../database/connection.js");
 var fs = require("fs");
-const publicPath = path.join(__dirname, "..", "client");
 const path = require("path");
 
 const PORT = process.env.PORT || 3001;
