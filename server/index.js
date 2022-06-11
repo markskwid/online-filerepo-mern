@@ -31,10 +31,8 @@ app.get("/api", (req, res) => {
 
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/public", "index.html"));
+  res.sendFile(path.resolve("../client/public/index.html"));
 });
-
-app.use("/public", express.static(path.join(__dirname + "/public")));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", req.headers.origin);
