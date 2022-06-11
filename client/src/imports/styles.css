@@ -1,0 +1,70 @@
+/** SIDEBAR **/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+.sidebar {
+  font-family: Poppins, sans-serif;
+  background-color: #36373c;
+}
+
+.modal-retrieve {
+  padding: 5px;
+}
+
+.sidebar i {
+  color: #3ad1a9;
+}
+
+.sidebar span {
+  color: white;
+}
+
+.name {
+  padding: 5px;
+  margin-left: 18px;
+  font-weight: bold;
+}
+
+.role {
+  background-color: #3ad1a9;
+  padding: 3px;
+  border-radius: 50px;
+
+  width: 150px;
+  text-align: center;
+}
+
+.modal-logout {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.modal-logout .modal-body {
+  padding: 0;
+}
+
+.btn-group-lg {
+  border-radius: 0px;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+
+  .profile-picture {
+    width: 30px;
+    height: 30px;
+    margin-top: 20px;
+  }
+}
+
+@media print {
+  .sidebar {
+    display: none;
+  }
+}

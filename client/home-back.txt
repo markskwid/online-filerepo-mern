@@ -1,0 +1,277 @@
+import "./global.css";
+import Sidebar from "../imports/sidebar";
+import { useState, useEffect, useContext, createContext } from "react";
+import axios from "axios";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+const current = new Date();
+
+const Home = () => {
+  const { state } = useLocation();
+  const [filev2, setFilev2] = useState([]);
+
+  const [myfile, setmyFile] = useState();
+  const [fileName, setFileName] = useState("");
+  const [extName, setExtName] = useState("");
+  const [currentPath, setPath] = useState("Directories");
+
+  const [wtf, setWtf] = useState(false);
+
+  const [alert, setAlert] = useState(false);
+
+  const [showModalFolder, setVisible] = useState(false);
+  const [showModalFile, setVisibleFile] = useState(false);
+  const [folderName, setFolderName] = useState("");
+
+  useEffect(() => {
+    document.title = "Homepage";
+    getData();
+  });
+
+  const getData = async () => {
+    const res = await axios.get("/api/read");
+    setFilev2(res.data);
+  };
+
+  const saveFile = (e) => {
+    setmyFile(e.target.files[0]);
+    setExtName(e.target.files[0].type);
+  };
+
+  const uploadInfo = () => {
+    const info = {
+      fileName: fileName,
+      extensionName: extName,
+      belongsTo: currentPath,
+    };
+    console.log("ye");
+    axios.post("/api/upload", info).then((res) => console.log("ye"));
+  };
+
+  const uploadFile = (e) => {
+    const data = new FormData();
+    data.append("file", myfile);
+    axios
+      .post("/api/upload", data)
+      .then((res) => uploadInfo())
+      .catch((err) => console.log(err));
+  };
+
+  const listFile = (folderName) => {
+    setPath(folderName);
+    axios
+      .post("/api/getfile", { folderName: folderName })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
+
+  const deleteFolder = (id, name) => {
+    axios
+      .post("/api/delete", { id: id, fileName: name })
+      .then((res) => setVisible(false))
+      .catch((err) => console.log(err));
+  };
+
+  const DisplayFilev2 = () => {
+    return filev2.map((item) => (
+      <div
+        key={item._id}
+        className="d-flex aligns-items-center mb-1 folder-container"
+      >
+        <i className="fa fa-folder-open"></i>
+        <span className="ms-2">{item.fileName}</span>
+        <span className="date text-center">
+          {item.dateCreated.substring(0, item.dateCreated.indexOf("T"))}
+        </span>
+        <i
+          className="fa fa-ellipsis-h ms-auto dropdown-toggle button-more"
+          data-bs-toggle="dropdown"
+        ></i>
+        <ul className="dropdown-menu">
+          <li>
+            <button
+              className="dropdown-item bg-transparent"
+              onClick={() => listFile(item.fileName)}
+            >
+              {" "}
+              Open
+            </button>
+          </li>
+          <li>
+            <button
+              className="dropdown-item bg-transparent"
+              onClick={() => deleteFolder(item._id, item.fileName)}
+            >
+              {" "}
+              Delete
+            </button>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">
+              Rename
+            </a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">
+              Move
+            </a>
+          </li>
+        </ul>
+      </div>
+    ));
+  };
+
+  const AlertBox = () => {
+    return (
+      <div className="alert alert-success alert-dismissible fade show">
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="alert"
+        ></button>
+        <strong>New Folder Created!</strong> You've created a new folder
+      </div>
+    );
+  };
+
+  const createFolder = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/create", {
+        fileName: folderName,
+        extensionName: "folder",
+        belongsTo: currentPath,
+      })
+      .then((res) => setFolderName(null), setAlert(true))
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <div className="container-fluid">
+      <div className="row flex-nowrap">
+        <Sidebar />
+        <div className="col py-3 content-area">
+          <h5>Search</h5>
+          <div className="container-fluid search-container">
+            <div className="row p-1">
+              <div className="col-md-6 p-2">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder="Search File"
+                  name="email"
+                />
+              </div>
+
+              <div className="col-md-3 text-center p-2">
+                <button
+                  type="button"
+                  onClick={() => setVisible(true)}
+                  className="btn btn-success w-100"
+                >
+                  <i className="fs-5 fa fa-folder"></i>
+                  <span className="ms-3  d-sm-inline">Add Folder</span>
+                </button>
+              </div>
+
+              <div className="col-md-3  text-center p-2">
+                <button
+                  type="button"
+                  className="btn btn-success w-100"
+                  onClick={() => setVisibleFile(true)}
+                >
+                  <i className="fs-5 fa fa-upload"></i>
+                  <span className="ms-3  d-sm-inline">Upload File</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          {alert ? <AlertBox /> : ""}
+          <div className="container-fluid for-sort">
+            <div className="row">
+              <div className="col-md-12">
+                <span>{currentPath}</span>
+                <select className="form-select form-select-sm w-25 float-sm-end">
+                  <option>Sort by name</option>
+                  <option>Sort by date</option>
+                  <option>Sort by type</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="container-fluid border for-table">
+            <table className="table mb-0 table-hover">
+              <thead className="table-dark">
+                <tr>
+                  <th>Name</th>
+                  <th></th>
+                  <th></th>
+                  <th>Date Created</th>
+                </tr>
+              </thead>
+            </table>
+
+            <div className="container-fluid for-folder">
+              <DisplayFilev2 />
+            </div>
+          </div>
+        </div>
+      </div>
+      <Modal show={showModalFolder} onHide={() => setVisible(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>New Folder</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={createFolder}>
+            <h6>Folder Name: </h6>
+            <Form.Control
+              type={"text"}
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+            />
+
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={() => setVisible(false)}
+              className="mt-2 w-100"
+            >
+              Create
+            </Button>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
+
+      <Modal show={showModalFile} onHide={() => setVisibleFile(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>New File</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h6>Name of File: </h6>
+          <Form.Control
+            type={"text"}
+            value={fileName}
+            onChange={(e) => setFileName(e.target.value)}
+            className="mb-1"
+          />
+          <h6>Select File: </h6>
+          <Form.Control type={"file"} onChange={saveFile} />
+
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={uploadFile}
+            className="mt-2 w-100"
+          >
+            Upload File
+          </Button>
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+export default Home;

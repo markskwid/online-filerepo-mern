@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.main-container {
+  height: 100vh;
+  background-color: #36373c;
+}
+
+.mainDivider {
+  padding: 0;
+  height: auto;
+  background-color: #36373c;
+}
+
+.mainDivider .header-file {
+  padding: 10px;
+  background-color: #13a27c;
+  margin-bottom: 10px;
+}
+
+.form-container {
+  font-family: Poppins, sans-serif;
+  margin: auto;
+  padding: 50px;
+  text-align: center;
+}
+
+.form-container .login-btn {
+  background-color: #13a27c;
+}
+
+.form-container p {
+  color: white;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.alert-box {
+  padding: 10px;
+}
+
+/** HOME **/
+
+.main-container-v2 {
+  height: 100vh;
+  background-color: white;
+}
+
+.content-area {
+  font-family: Poppins, sans-serif;
+}
+
+.content-area h5 {
+  font-weight: bold;
+}
+
+.content-area .search-container {
+  border: 1px solid rgb(151, 151, 151);
+  box-shadow: 5px 8px 3px gray;
+  margin-bottom: 30px;
+}
+
+.content-area .view-container {
+  border: 1px solid rgb(151, 151, 151);
+  box-shadow: 5px 8px 3px gray;
+  margin-bottom: 30px;
+}
+
+.icons {
+  color: #13a27c;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.user-data {
+  margin-right: 50px;
+}
+
+.content-area .view-container .profile-picture {
+  border: 3px solid #13a27c;
+}
+
+.edit-btn-container {
+  padding: 0;
+  margin: 0;
+}
+
+.edit-btn {
+  font-weight: bold;
+  background-color: #13a27c;
+  padding: 10px;
+  cursor: pointer;
+  border-end-end-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0px 8px 3px rgb(221, 221, 221);
+}
+
+.update-profile {
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+
+  z-index: -1;
+}
+.inputfile + label {
+  color: white;
+  background-color: #13a27c;
+  padding: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  cursor: pointer;
+}
+
+.modal .profile-picture {
+  border: 2px solid #13a27c;
+}
+
+.modal .profile-container {
+  padding: 0;
+}
+
+.modal {
+  font-family: "Poppins", sans-serif;
+}
+.content-area .view-container .user-role {
+  background-color: #13a27c;
+  padding: 3px;
+  width: 160px;
+  text-align: center;
+  border-radius: 50px;
+  box-shadow: 5px 5px 4px rgb(218, 218, 218);
+  font-weight: bold;
+  color: white;
+}
+
+.content-area .view-container .user-name {
+  font-weight: bold;
+}
+
+.user-information {
+  font-weight: bold;
+}
+
+.content-area .for-sort {
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.back-label {
+  cursor: pointer;
+}
+
+.pg-viewer-wrapper {
+  overflow-y: unset !important;
+}
+
+.photo-viewer-container {
+  width: 100% !important;
+  height: 500px !important;
+}
+
+.photo-viewer-container > img {
+  width: 100% !important;
+  height: 500px !important;
+}
+
+.content-area .for-table,
+.for-table-users {
+  padding: 0;
+}
+
+.content-area .for-folder {
+  padding: 5px;
+}
+
+.content-area .folder-container {
+  padding: 8px;
+  border: 1px solid gray;
+  margin-top: 0;
+  border-radius: 10px;
+}
+
+.content-area .folder-container-home {
+  padding: 8px;
+  border: 1px solid gray;
+  margin-top: 0;
+  border-radius: 10px;
+  background-color: #b9b9b9a8;
+}
+
+.content-area .folder-container-home i {
+  color: #058d69;
+  font-size: 30px;
+}
+
+.content-area .folder-container-home span {
+  font-size: 20px;
+}
+
+.content-area .folder-container-home .button-more {
+  color: black;
+}
+
+.content-area .folder-container i {
+  color: #058d69;
+  font-size: 30px;
+}
+
+.for-table-history {
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 300px;
+}
+
+.content-area .folder-container span {
+  font-size: 20px;
+}
+
+.content-area .table-dark th {
+  padding-left: 15px;
+}
+
+.content-area .folder-container .date {
+  font-size: 20px;
+  margin-left: auto;
+}
+
+.content-area .folder-container .button-more {
+  color: black;
+}
+
+.content-area .button-more::after {
+  display: none !important;
+}
+
+@media only screen and (min-width: 600px) {
+}

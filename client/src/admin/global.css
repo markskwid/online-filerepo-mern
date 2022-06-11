@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.main-container {
+  height: 100vh;
+  background-color: #36373c;
+}
+
+.form-container {
+  font-family: Poppins, sans-serif;
+  margin: auto;
+  padding: 50px;
+  text-align: center;
+}
+
+.form-container .login-btn {
+  background-color: #13a27c;
+}
+
+.form-container p {
+  color: white;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.alert-box {
+  padding: 10px;
+}
+
+/** HOME **/
+
+.main-container-v2 {
+  height: 100vh;
+  background-color: white;
+}
+
+.content-area {
+  font-family: Poppins, sans-serif;
+}
+
+.content-area .search-container {
+  border: 1px solid rgb(151, 151, 151);
+  box-shadow: 5px 8px 3px gray;
+  margin-bottom: 30px;
+}
+
+.content-area .for-sort {
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.content-area .for-table-print {
+  overflow: auto;
+  height: 400px;
+  padding: 0;
+}
+
+.content-area .for-folder {
+  padding: 5px;
+  overflow: auto;
+  height: 400px;
+}
+
+.content-area .for-logs {
+  overflow: auto;
+  height: 400px;
+  padding: 0;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+}
+
+.content-area .folder-container {
+  padding: 8px;
+  border: 1px solid gray;
+  margin-top: 0;
+  border-radius: 10px;
+}
+
+.content-area .folder-container i {
+  color: #058d69;
+  font-size: 30px;
+}
+
+.content-area .folder-container span {
+  font-size: 20px;
+}
+
+.content-area .table-dark th {
+  padding-left: 15px;
+}
+
+.content-area .folder-container .date {
+  font-size: 20px;
+  margin-left: auto;
+}
+
+.content-area .folder-container .button-more {
+  color: black;
+}
+
+.content-area .button-more::after {
+  display: none !important;
+}
+
+.table-container {
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  height: 600px;
+}
+
+.table-head {
+  border-bottom: 1px solid gray;
+  font-weight: bold;
+  background-color: #36373c;
+  color: white;
+}
+
+.footer {
+  background-color: #36373c;
+  color: white;
+  font-size: 12px;
+  padding: 8px;
+  visibility: hidden;
+}
+
+.button-print-container {
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.button-print-container .row {
+  padding-left: 10px;
+}
+
+.button-print-container .row .print-btn {
+  margin-left: 158px;
+}
+
+.for-table-users {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 500px;
+}
+
+@media only screen and (min-width: 600px) {
+}
+
+@media print {
+  @page {
+    margin: 10px;
+  }
+  .search-container,
+  .print-btn {
+    display: none;
+  }
+
+  .hide-modal {
+    display: none;
+  }
+
+  .thead-table {
+    margin-top: 20px;
+  }
+
+  .button-print-container {
+    display: none;
+  }
+
+  .table-head,
+  .thead-table {
+    background-color: #36373c !important;
+    color: white;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .footer {
+    background-color: #36373c !important;
+    -webkit-print-color-adjust: exact;
+    visibility: visible;
+  }
+
+  .for-sort {
+    display: none;
+  }
+}

@@ -1,0 +1,132 @@
+import "./App.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import fileDownload from "js-file-download";
+
+function App() {
+  const [data, setData] = useState(null);
+  const [name, setName] = useState("");
+  const [info, setInfo] = useState({
+    name: "",
+  });
+  const [flag, setFlag] = useState(false);
+  const [files, setFiles] = useState([]);
+  const [wtf, setWtf] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setInfo({ name: val });
+  };
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    console.log(info);
+    setSuccess(true);
+    setName(info.name);
+    axios
+      .post("http://localhost:3001/send", info)
+      .then(() => {
+        console.log("Added");
+        setSuccess(false);
+      })
+      .catch(() => {
+        console.log("Something went wrong. Plase try again later");
+      });
+  };
+
+  useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  });
+
+  const listFolderFile = () => {
+    if (show === true) {
+      setShow(false);
+    } else if (flag) {
+      setShow(true);
+    } else {
+      fetch("/listfile")
+        .then((res) => res.json())
+        .then((data) =>
+          data.forEach((element) => {
+            files.push(element);
+            setFlag(true);
+            setShow(true);
+            setWtf([...files]);
+          })
+        );
+    }
+  };
+
+  const consoleMe = (key) => {
+    console.log(key);
+  };
+
+  const SeeFiles = () => {
+    if (show === true) {
+      return Object.keys(files).map((key) => (
+        <button onClick={() => download(files[key])} key={key}>
+          {files[key]}
+        </button>
+      ));
+    } else {
+      return <p></p>;
+    }
+  };
+
+  const download = (name) => {
+    const file = { fileName: name };
+    axios
+      .post("http://localhost:3001/download", file)
+      .then((data) => fileDownload(data.data, name))
+      .catch((err) => console.log(err));
+  };
+
+  const apiCall = () => {
+    const data = { fileName: "sample.txt" };
+    axios
+      .post("/download", {
+        fileName: "sample.txt",
+      })
+      .then((data) => fileDownload(data.data, "umay"))
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <div className="main-container">
+      <div className="container-fluid header">
+        <p className="display-5 text-center">Sample Project</p>
+      </div>
+
+      <div className="col-md-5 mx-auto text-center p-4">
+        <h4>Enter folder name</h4>
+        <form onSubmit={onSubmitForm}>
+          <div className="mb-3 mt-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Folder name..."
+              value={info.name}
+              onChange={handleChange}
+            />
+          </div>
+          <input type="submit" className="btn btn-primary mb-4" />
+          <h6>{!name ? "" : name + " is created"}</h6>
+        </form>
+        <button onClick={listFolderFile} className="btn btn-primary mb-4">
+          List Files
+        </button>
+
+        <button onClick={apiCall} className="btn btn-primary mb-4">
+          Try API
+        </button>
+        <SeeFiles />
+      </div>
+    </div>
+  );
+}
+
+export default App;
