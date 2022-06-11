@@ -6,10 +6,10 @@ const fileRouter = require("../routes/fileRoutes");
 const Login = require("../routes/login");
 const User = require("../routes/userRoutes");
 const Logs = require("../routes/logsRoutes");
+const path = require("path");
 const connection = require("../database/connection.js");
 const publicPath = path.join(__dirname, "..", "public");
 var fs = require("fs");
-const path = require("path");
 
 const PORT = process.env.PORT || 3001;
 
