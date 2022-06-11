@@ -24,7 +24,7 @@ app.use("/logs", Logs);
 app.use(express.static(path.resolve(__dirname, "../client/public")));
 
 // Handle GET requests to /api route
-app.get("/api", (req, res) => {
+app.get("/api-server", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
